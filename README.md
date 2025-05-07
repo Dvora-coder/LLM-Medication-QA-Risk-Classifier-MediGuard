@@ -1,15 +1,46 @@
 # MediGuard
 
-This project uses LLMs to classify medication-related questions by risk level: **General**, **Personal**, or **Critical**.  
-Based on the [MedInfo2019-QA-Medications](https://github.com/abachaa/Medication_QA_MedInfo2019) dataset, we added a custom annotation layer with risk labels.  
-We evaluate both traditional ML models and LLM-based approaches (e.g., DistilBERT, GPT) to improve safety in drug-related question answering.
+**MediGuard** is an NLP-based project designed to classify medication-related questions by clinical **risk level**:
+**General** (safe) or **Critical** (potentially dangerous).
 
-![image](https://github.com/user-attachments/assets/203e90c3-5efc-43c4-83a5-94b8a5e53c16)
+We aim to improve patient safety by identifying high-risk drug-related queries that may require professional medical attention.
+![image](https://github.com/user-attachments/assets/2163963a-b88f-46bb-a521-d90def651501)
 
+## Project Overview
 
+* **Input**: Free-text medication questions (e.g., about dosage, side effects, drug interactions)
+* **Output**: Risk classification – `General` or `Critical`
+* **Task Type**: Binary text classification (clinical risk prediction)
 
-## Key Features
-- Manual risk-level annotation of ~700 patient questions
-- Classification using both traditional and LLM-based models
-- Evaluation with accuracy, precision, recall, F1
-- Optional drug name extraction (NER) for improved understanding
+## Dataset & Annotation
+
+* Based on the [MedInfo2019-QA-Medications](https://github.com/abachaa/Medication_QA_MedInfo2019) dataset
+* Manually annotated \~700 questions with a new `Risk_Level` label
+* Dataset imbalance handled via **SMOTE** (oversampling `Critical` class)
+* Mean question length: \~50 words
+
+## Methodology
+
+* **Text Preprocessing**: Lowercasing, punctuation removal, stopword filtering
+* **Vectorization**: TF-IDF, with **dimensionality reduction** using SVD
+* **Feature Engineering**:
+   Added a `Critical Similarity` score based on cosine distance to high-risk questions
+* **Models Evaluated**:
+
+  * Logistic Regression (and SGD with regularization)
+  * Support Vector Machine (SVM)
+  * Random Forest
+  * Gradient Boosting
+  * KNN
+* **Evaluation Metrics**: Accuracy, Precision, Recall, F1, Confusion Matrix
+* **Validation**: 80/20 train-test split with optional K-Fold CV
+
+## Key Insights
+
+* Binary classification (General vs Critical) yielded more **stable** results (F1 ≈ 77%)
+* Multiclass classification (General, Personal, Critical) suffered from **overfitting**
+* Adding semantic similarity features boosted performance on borderline cases
+
+## LLM-based Exploration (Next Steps)
+
+We are exploring **LLM-based classifiers** (e.g., DistilBERT, GPT) for deeper semantic understanding, as well as **Named Entity Recognition (NER)** to extract drug names and medical terms for richer context modeling.
