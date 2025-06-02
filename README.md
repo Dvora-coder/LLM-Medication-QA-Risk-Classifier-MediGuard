@@ -69,8 +69,39 @@ Based on the [MedInfo2019-QA-Medications](https://github.com/abachaa/Medication_
   High feature-to-sample ratio and class imbalance required careful handling
 
 
-## Future Work
 
-* Integrate transformer-based models like **DistilBERT** and **GPT** for deeper semantic classification
-* Apply **Named Entity Recognition (NER)** to extract drug names and medical conditions
-* Incorporate external clinical knowledge bases (e.g., DrugBank, UMLS) for better context-aware classification
+## LLM-Based Modeling
+
+To enhance performance beyond traditional classifiers, we explored **pretrained biomedical language models** and retrieval-augmented methods.
+
+### 1. **BioBERT & BlueBERT Fine-Tuning**
+
+* We fine-tuned domain-specific LLMs on the binary risk classification task:
+
+  * **BioBERT** (pretrained on PubMed/PubMedCentral)
+  * **BlueBERT** (pretrained on MIMIC-III and PubMed)
+* Training setup:
+  "AdamW", learning rate "2e-5", batch size "16", for "3 epochs".
+* Evaluation on the test set showed **BioBERT consistently outperformed other models**, especially in detecting "Critical" questions.
+
+### 2. **GPT-4.1 Classification (RAG-based)**
+
+* We used **GPT-4.1** for classification:
+
+  * Questions were combined with up to 3 retrieved context passages from a FAISS index over a custom drug corpus.
+  * The model classified each input as "General" or "Critical".
+* This method leveraged **Retrieval-Augmented Generation (RAG)** to inject domain-specific context without fine-tuning the LLM.
+
+### 3. **GPT-4.1 Question Generation (Data Augmentation)**
+
+* To address **data scarcity**, we prompted GPT-4.1 to generate \~50 synthetic "Critical" questions (e.g., overdose, dangerous combinations).
+* These were manually reviewed and added to the training set.
+* Retraining models with the augmented data improved **Critical recall**.
+
+
+
+Here’s a compact version you can include right after *Key Results*:
+
+> **LLM Takeaway**:
+> Fine-tuned **BioBERT** achieved the best overall accuracy.
+> **GPT-4.1 + RAG** offered flexibility without retraining, and **synthetic augmentation** via GPT-4.1 helped address class imbalance and improved sensitivity to dangerous cases.
