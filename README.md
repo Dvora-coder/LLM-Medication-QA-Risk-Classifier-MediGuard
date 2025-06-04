@@ -2,8 +2,59 @@
 
 **MediGuard** is an NLP-based classification project that identifies the **clinical risk level** of medication-related questions.
 The goal is to distinguish between questions that are routine (**General**) and those that may require medical intervention (**Critical**), thus improving patient safety in medication-related chat systems.
+MediGuard leverages both classical ML and state-of-the-art LLMs (BioBERT, BlueBERT, GPT-4.1 + RAG) to automatically flag potentially dangerous medication queries.
 
 ![image](https://github.com/user-attachments/assets/2163963a-b88f-46bb-a521-d90def651501) 
+
+![image](https://github.com/user-attachments/assets/baa95e09-f348-41e5-b5a4-f1e1b552d187)
+1. **Input & Labeling**
+
+   * A free‐text medication question (e.g., "What happens if I accidentally take 50 mg of lisinopril twice?") enters the system.
+   * Each question is manually labeled and verified with a `risk_level` field set to either **General** (routine/no immediate danger) or **Critical** (potentially dangerous, requires medical attention).
+
+2. **Exploratory Data Analysis (EDA)**
+
+   * Once all questions have received a `risk_level` label, an EDA step examines overall distributions, class imbalance (e.g., far more "General" than "Critical"), question lengths, word frequencies, and missing values.
+   * Insights from EDA guide decisions about cleaning strategies, feature engineering, and how to handle imbalanced classes (e.g., applying SMOTE).
+   * The final dataset contains approximately 700 questions, of which roughly 20% labeled as Critical. We applied SMOTE to address this imbalance.
+
+3. **Cleaning & Tokenization**
+
+   * Raw question text (and any associated answer text) is converted to lowercase, stripped of punctuation, and tokenized.
+   * Stopwords are removed, and the data is transformed into a format ready for vectorization (e.g., splitting each string into individual tokens).
+
+4. **Baseline Pipeline**
+
+   * **TF–IDF Vectorization**: Each cleaned question is represented as a sparse TF–IDF vector.
+   * **Critical‐Similarity Feature**: A custom cosine‐similarity score is computed between each question and a small set of known high‐risk examples, yielding an additional numeric feature.
+   * **SMOTE**: Synthetic Minority Over‐Sampling Technique is applied to balance the "Critical" and "General" classes in the training set.
+   * These features feed into classical machine‐learning classifiers (Logistic Regression, SVM, Random Forest, Gradient Boosting, KNN, SGD) with an 80/20 stratified train‐test split (and optional k‐fold cross‐validation) to produce baseline performance metrics.
+
+5. **RAG (Retrieval‐Augmented Generation) Pipeline**
+
+   * **Build FAISS Index**: A DPR (Dense Passage Retriever) context encoder is used to embed every passage in a custom drug‐related corpus, then a FAISS index is built over these embeddings.
+   * **Encode Question**: At inference time, each incoming question is passed through the DPR question encoder to produce a query embedding.
+   * **Retrieve Top‐k Passages**: Using FAISS, the top‐k most semantically similar passages from the corpus are retrieved and returned as "Relevant Context" for that question.
+
+6. **LLM Tuning & Inference**
+
+   * Retrieved context passages are combined with a few‐shot prompt template and sent to a large language model (e.g., GPT-4.1) for classification without further fine‐tuning.
+   * Alternatively, domain‐specific transformers (BioBERT, BlueBERT) can be fine‐tuned on the annotated training set.
+   * In both cases, the system outputs a final prediction- "General" or "Critical"—for each question.
+
+7. **Training & Evaluation**
+
+   * For the baseline classifiers and the fine‐tuned BERT models, standard metrics (accuracy, precision, recall, F1, confusion matrix) are calculated on the held-out 20% test set (and, if used, cross‐validation folds).
+   * For the RAG + GPT-4.1 approach, predictions are compared to ground-truth labels, and classification metrics are reported to assess whether retrieval‐augmented prompting improved performance without model retraining.
+
+---
+
+In summary, the diagram shows two parallel strategies built on the same cleaned and tokenized data:
+
+* a **Baseline** classical ML pipeline (TF–IDF + SMOTE + traditional classifiers), and
+* a **Retrieval-Augmented Generation (RAG)** pipeline (DPR + FAISS + GPT-4.1 or fine-tuned BioBERT/BlueBERT).
+
+Both approaches ultimately feed into evaluation of "General" vs. "Critical" classification metrics.
 
 ## Project Overview
 
@@ -97,7 +148,6 @@ To enhance performance beyond traditional classifiers, we explored **pretrained 
 * To address **data scarcity**, we prompted GPT-4.1 to generate \~50 synthetic "Critical" questions (e.g., overdose, dangerous combinations).
 * These were manually reviewed and added to the training set.
 * Retraining models with the augmented data improved **Critical recall**.
-
 
 
 Here’s a compact version you can include right after *Key Results*:
