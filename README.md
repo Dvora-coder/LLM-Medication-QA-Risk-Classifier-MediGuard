@@ -8,7 +8,7 @@
 > Automatically classify free-text medication-related questions into `General` (safe) or `Critical` (dangerous) using traditional ML & advanced LLM models (BioBERT, GPT-4.1, BlueBERT).  
 > Designed to **improve patient safety** and **support clinical chatbot systems**.
 
-📊 [Results](#results) • 🚀 [Quick Start](#quick-start) • 📚 [Documentation](#documentation) • 🎯 [Architecture](#architecture)
+ [Results](#results) •  [Quick Start](#quick-start) •  [Documentation](#documentation) •  [Architecture](#architecture)
 
 ---
 
@@ -31,7 +31,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 **MediGuard** addresses a critical need in clinical AI:  
 Patients frequently ask medication-related questions via chatbots, health forums, and public platforms like **Reddit**, where unverified answers often spread unchecked. While some questions are harmless, others may hint at **life-threatening risks** (e.g., overdose, dangerous interactions) — yet go unnoticed.
