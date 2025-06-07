@@ -257,7 +257,7 @@ Holon Institute of Technology (HIT), Israel
 ### 🙏 Acknowledgments
 
  **MedInfo2019-QA-Medications** dataset — for providing the core question set used in this project  
-  *(Original creators: Aansori et al., shared via GitHub [here](https://github.com/AANSORI/MedInfo2019-QA-Medications))*
+  *(Original creators: Aansori et al., shared via GitHub [here]https://github.com/abachaa/Medication_QA_MedInfo2019)*
     Aansori et al. (2019). MedInfo2019-QA-Medications. Available on GitHub
 * **DrugBank** – for enabling reference to structured drug–drug interaction data
 * **WHO Essential Medicines List (EML)** – for grounding domain corpus
