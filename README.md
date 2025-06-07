@@ -1,4 +1,3 @@
-````md
 # 🧠 MediGuard: LLM-Based Risk Classification of Medication Questions
 
 ![MediGuard](https://img.shields.io/badge/MediGuard-Drug%20Risk%20QA-blue)
