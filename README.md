@@ -12,7 +12,7 @@
 
 ---
 
-## 🗂️ Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Graphical Abstract](#graphical-abstract)
@@ -58,7 +58,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🧩 Problem Statement
+## Problem Statement
 
 > **Task**: Classify free-text questions about medications by their risk level  
 > **Input**: "Is it safe to take ibuprofen with warfarin?"  
@@ -72,7 +72,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🚀 Key Contributions
+## Key Contributions
 
 ✅ Built a full classification pipeline using classical ML and LLMs  
 ✅ Engineered a novel `Critical Similarity` feature using TF-IDF  
@@ -82,9 +82,9 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🧪 Methodology
+## Methodology
 
-### 🔍 Data & Preprocessing
+### Data & Preprocessing
 
 | Source | MedInfo2019-QA-Medications |
 |--------|-----------------------------|
@@ -96,7 +96,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 - SMOTE oversampling for balance
 - Dimensionality reduction (SVD)
 
-### 🧠 Models Used
+### Models Used
 
 #### 🔸 Baseline Models:
 - Logistic Regression
@@ -126,7 +126,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 📊 Results
+## Results
 
 | Model | Accuracy | Macro-F1 |
 |-------|----------|----------|
@@ -136,7 +136,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 | Random Forest | 0.68 | 0.70	|
 | SGD Logistic (L2) | 0.79 | 0.79 |
 | KNN | 0.10 | 0.19 |
-| BioBERT (best) | 0.92 | 0.90 |
+| **BioBERT (best)** | 0.92 | 0.90 |
 | BioBERT (best), weighted | 0.9180 | 0.9187 |
 | BlueBERT | 0.92 | 0.90 |
 | BlueBERT, weighted | 0.9180 | 0.9180 |
@@ -153,7 +153,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🧠 Insights
+## Insights
 
 - The custom Critical Similarity feature (cosine similarity over TF-IDF) provided a useful semantic signal to flag borderline-risk questions.
 - RAG-based context retrieval consistently improved model performance across all LLMs.
@@ -162,7 +162,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Run baseline model training:
 
@@ -184,7 +184,7 @@ jupyter notebook notebooks/GPT4_1.ipynb
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 See each notebook under `/notebooks/` for:
 
@@ -196,7 +196,7 @@ See each notebook under `/notebooks/` for:
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 MediGuard/
@@ -222,7 +222,7 @@ MediGuard/
 ```
 ---
 
-## 👥 Authors
+## Authors
 
 Dvora Goncharok & Arbel Shifman  
 Final-year B.Sc. students in Digital Medical Technologies  
@@ -230,9 +230,9 @@ Holon Institute of Technology (HIT), Israel
 
 ---
 
-## 📚 References & Technical Stack
+## References & Technical Stack
 
-### 📝 Key Papers & Related Work
+### Key Papers & Related Work
 
 * **[PLOS ONE (2020)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0230876)** – Identifying medication-related intent in patient questions using NLP techniques
 * **[JMIR MedInform (2022)](https://medinform.jmir.org/2022/9/e37770)** – Risk-level classification of COVID-related telehealth queries with SBERT
@@ -243,7 +243,7 @@ Holon Institute of Technology (HIT), Israel
 
 ---
 
-### 🛠️ Technical Stack
+### Technical Stack
 
 * **Models**: BioBERT, BlueBERT, GPT-4.1 (with and without synthetic generation)
 * **Retrieval**: DPRContextEncoder, FAISS indexing (IVFFlat)
@@ -254,7 +254,7 @@ Holon Institute of Technology (HIT), Israel
 
 ---
 
-### 🙏 Acknowledgments
+### Acknowledgments
 
  **MedInfo2019-QA-Medications** dataset — for providing the core question set used in this project  
   *(Original creators: Aansori et al., shared via GitHub https://github.com/abachaa/Medication_QA_MedInfo2019)*
@@ -271,7 +271,7 @@ For questions, feedback, or collaboration — feel free to [open an issue](https
 
 ---
 
-## 📌 Citation
+## Citation
 > 📌 If you use this work, please cite it as follows:
 ```
 @misc{MediGuard2024,
