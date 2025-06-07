@@ -198,7 +198,7 @@ See each notebook under `/notebooks/` for:
 
 ## 🗂️ Project Structure
 
-
+```
 MediGuard/
 ├── data/
 │ ├── MedInfo2019-QA-Medications.xlsx # Original QA dataset
@@ -219,7 +219,7 @@ MediGuard/
 │ ├── gpt4_preds        # GPT-4.1 predictions via Azure OpenAI API (no local model)
 │
 └── README.md # Project documentation
-
+```
 ---
 
 ## 👥 Authors
@@ -272,7 +272,7 @@ For questions, feedback, or collaboration — feel free to [open an issue](https
 ---
 
 ## 📌 Citation
-
+> 📌 If you use this work, please cite it as follows:
 ```
 @misc{MediGuard2024,
   author = {Goncharok, Dvora and Shifman, Arbel},
@@ -281,7 +281,3 @@ For questions, feedback, or collaboration — feel free to [open an issue](https
   url = {https://github.com/Dvora-coder/LLM-Medication-QA-Risk-Classifier-MediGuard}
 }
 ```
-
-```
-
----
