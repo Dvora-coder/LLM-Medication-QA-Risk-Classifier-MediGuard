@@ -88,8 +88,8 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 | Source | MedInfo2019-QA-Medications |
 |--------|-----------------------------|
-| Size | 652 questions after cleaning |
-| Labels | `General` (522), `Critical` (130) |
+| Size | 655 questions after cleaning |
+| Labels | `General` , `Critical` |
 
 - TF-IDF vectorization
 - Cosine similarity → `Critical Similarity` score
