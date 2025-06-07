@@ -49,7 +49,7 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## 🖼️ Graphical Abstract
+## Graphical Abstract
 
 **Pipeline Diagram:**
 ![image](https://github.com/user-attachments/assets/2163963a-b88f-46bb-a521-d90def651501)
