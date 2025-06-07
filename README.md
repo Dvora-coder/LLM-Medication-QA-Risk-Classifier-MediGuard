@@ -144,8 +144,11 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 | GPT-4.1 (gen+classify) | 0.8926 | 0.8506 |
 
 ✅ BioBERT achieved the best overall performance (Accuracy 0.92, F1 0.90)
+
 📈 SVM was the strongest classical model
+
 📊 GPT-4.1 with generation improved performance on rare cases
+
 ❌ KNN was ineffective due to lack of generalization on Critical class
 
 ---
