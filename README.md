@@ -126,6 +126,36 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
+## Architecture
+
+The MediGuard system follows a multi-stage architecture:
+
+1. **Input**  
+   Free-text question from a user (e.g., "Can I take ibuprofen with warfarin?")
+
+2. **Preprocessing**  
+   - Text cleaning and lowercasing  
+   - Tokenization + TF-IDF vectorization  
+   - `Critical Similarity` score based on cosine distance  
+   - Dimensionality reduction (SVD)  
+   - SMOTE balancing for classical models
+
+3. **Modeling Layer**  
+   - 🧠 **Classical ML**: SVM, Logistic Regression, Random Forest, Gradient Boosting, SGD, K-Nearest Neighbors (KNN)
+   - 🤖 **LLMs**: Fine-tuned BioBERT and BlueBERT  
+   - ✨ **GPT-4.1** (via Azure API):  
+      - **Classification**: Prompt-based risk classification using RAG-retrieved context  
+      - **Generation + Classification**: Generate synthetic `Critical` questions, then classify them using the same prompt-based method
+
+4. **RAG Contextual Retrieval**  
+   - FAISS index built from a hybrid corpus (DrugBank + WHO EML)  
+   - DPR encoders retrieve top-3 relevant passages for each question  
+   - Context fed into LLMs during classification
+
+5. **Output**  
+   Final risk prediction: `General` (safe) or `Critical` (needs attention)
+
+---
 ## Results
 
 | Model | Accuracy | Macro-F1 |
