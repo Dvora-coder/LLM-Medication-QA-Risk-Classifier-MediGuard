@@ -14,20 +14,20 @@
 
 ## 🗂️ Table of Contents
 
-- 🎯 [Overview](#overview)
-- 🖼️ [Graphical Abstract](#graphical-abstract)
-- 🧩 [Problem Statement](#problem-statement)
-- 🚀 [Key Contributions](#key-contributions)
-- 🧪 [Methodology](#methodology)
-  - 🔍 [Data & Preprocessing](#data--preprocessing)
-  - 🧠 [Models Used](#models-used)
-- 📊 [Results](#results)
-- 🧠 [Insights](#insights)
-- 📦 [Installation](#installation)
-- 🚀 [Quick Start](#quick-start)
-- 📚 [Documentation](#documentation)
-- 👥 [Authors](#authors)
-- 📌 [Citation](#citation)
+- [Overview](#overview)
+- [Graphical Abstract](#graphical-abstract)
+- [Problem Statement](#problem-statement)
+- [Key Contributions](#key-contributions)
+- [Methodology](#methodology)
+  - [Data & Preprocessing](#data--preprocessing)
+  - [Models Used](#models-used)
+- [Results](#results)
+- [Insights](#insights)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Authors](#authors)
+- [Citation](#citation)
 
 ---
 
