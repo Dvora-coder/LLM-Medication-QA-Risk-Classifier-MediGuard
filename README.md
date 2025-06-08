@@ -304,7 +304,7 @@ For questions, feedback, or collaboration — feel free to [open an issue](https
 ## Citation
 > 📌 If you use this work, please cite it as follows:
 ```
-@misc{MediGuard2024,
+@misc{MediGuard2025,
   author = {Goncharok, Dvora and Shifman, Arbel},
   title = {MediGuard: Risk Classification of Medication Questions Using LLMs},
   year = {2025},
