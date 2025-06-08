@@ -307,7 +307,7 @@ For questions, feedback, or collaboration — feel free to [open an issue](https
 @misc{MediGuard2024,
   author = {Goncharok, Dvora and Shifman, Arbel},
   title = {MediGuard: Risk Classification of Medication Questions Using LLMs},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/Dvora-coder/LLM-Medication-QA-Risk-Classifier-MediGuard}
 }
 ```
