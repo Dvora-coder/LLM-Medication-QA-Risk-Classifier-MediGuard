@@ -1,9 +1,8 @@
-# 🧠 MediGuard: LLM-Based Risk Classification of Medication Questions
+# MediGuard: Detecting Critical Medication-Related Questions Using Large-Scale Hybrid NLP Methods
+Dvora Goncharok · Arbel Shifman · Alexander Apartsin
+Holon Institute of Technology (HIT), 2025
 
-![MediGuard](https://img.shields.io/badge/MediGuard-Drug%20Risk%20QA-blue)
-![Python](https://img.shields.io/badge/Python-3.8%2B-green)
-![Transformers](https://img.shields.io/badge/Transformers-4.x-yellow)
-![LLM](https://img.shields.io/badge/Model-BioBERT%20%7C%20GPT--4.1%20%7C%20BlueBERT-purple)
+
 
 > Automatically classify free-text medication-related questions into `General` (safe) or `Critical` (dangerous) using traditional ML & advanced LLM models (BioBERT, GPT-4.1, BlueBERT).  
 > Designed to **improve patient safety** and **support clinical chatbot systems**.
@@ -31,21 +30,15 @@
 
 ---
 
-## Overview
+## Abstract
 
-**MediGuard** addresses a critical need in clinical AI:  
-Patients frequently ask medication-related questions via chatbots, health forums, and public platforms like **Reddit**, where unverified answers often spread unchecked. While some questions are harmless, others may hint at **life-threatening risks** (e.g., overdose, dangerous interactions) — yet go unnoticed.
+Online medication inquiries often contain early-warning signals of confusion, misuse, harmful drug–drug interactions, and potentially dangerous self-medication. Detecting these high-risk questions is essential for early triage, pharmacovigilance, and improving patient safety in digital health environments.
 
-This project builds a **binary risk classifier** (`General` / `Critical`) to automatically **flag high-risk questions** and **prioritize medical intervention**.
+We introduce MediGuard, a large-scale benchmark dataset of 5,000 medication-related questions, manually annotated for clinical criticality (Critical / General). Each sample was double-annotated by two independent reviewers with agreement measured via Cohen’s κ.
 
-Why it matters:
+To establish a strong baseline, we evaluate classical machine-learning models, biomedical transformer models, and several modern LLM-driven classification strategies, including embedding-based retrieval for contextual conditioning. We place special emphasis on lexical and semantic diversity, ensuring robust generalization and reducing overfitting to narrow phrasing patterns.
 
-- ❗ Prevents clinical harm by identifying unsafe self-medication patterns  
-- 💬 Reduces reliance on **non-expert advice** shared in forums and social media  
-- 🏥 Helps **health systems and insurers** avoid unnecessary ER visits and treatments  
-- 💸 Reduces **financial waste** from avoidable hospitalizations and misprioritized care
-
-By embedding LLM-based risk awareness into QA systems, **MediGuard** improves safety and efficiency across the entire healthcare ecosystem.
+This benchmark is intended to support future research in digital triage, clinical question classification, and the safety evaluation of medical chatbots.
 
 ---
 
@@ -58,18 +51,44 @@ By embedding LLM-based risk awareness into QA systems, **MediGuard** improves sa
 
 ---
 
-## Problem Statement
+## Problem Definition
 
-> **Task**: Classify free-text questions about medications by their risk level  
+> **Task**:
+> Binary classification:
+> Critical - indicates potentially dangerous medication behavior
+> General - informational or low-risk medication questions
+
 > **Input**: "Is it safe to take ibuprofen with warfarin?"  
 > **Output**: `"Critical"`
 
+> **Motivation**:
+> 
 **Challenges**:
 - Ambiguous, short, layman phrasing
 - High precision needed to avoid clinical harm
 - Imbalanced dataset (few `Critical` examples)
 - Brand names & context variation
 
+
+
+
+
+
+Motivation
+
+LLMs increasingly power medical chatbots, but they may provide harmful advice when failing to identify high-risk intent embedded in seemingly innocent questions.
+
+Challenges
+
+Layperson language is noisy and inconsistent
+
+Critical cases are rare → class imbalance
+
+Drug names vary across brands and international labels
+
+Ambiguity: same drug question may be safe or dangerous depending on context
+
+Need for rigorous statistical evaluation + diversity control
 ---
 
 ## Key Contributions
@@ -226,29 +245,46 @@ See each notebook under `/notebooks/` for:
 
 ---
 
-## Project Structure
-
+## Repository Structure
 ```
 MediGuard/
+│
+├── README.md
 ├── data/
-│ ├── MedInfo2019-QA-Medications.xlsx # Original QA dataset
-│ ├── DDI_data.xlsx # Drug–drug interaction data (DrugBank)
-│ ├── EML_export.xlsx # WHO essential medicines data
-│ └── knowledge_corpus.csv # Combined corpus for RAG
+│   ├── raw/
+│   ├── annotated/
+│   ├── synthetic/
+│   ├── validation/
+│   └── drug_lists/
 │
 ├── notebooks/
-│ ├── 01_EDA_Preprocessing.ipynb # Data cleaning, label analysis, SMOTE
-│ ├── MediGuard_baseline_training.ipynb # Classical ML models (TF-IDF, SVM, etc.)
-│ ├── BioBERT.ipynb # BioBERT fine-tuning with RAG context
-│ ├── BlueBERT.ipynb # BlueBERT fine-tuning with RAG context
-│ └── GPT4_1.ipynb # GPT-4.1 prompt engineering + generation
+│   ├── 01_dataset_construction.ipynb
+│   ├── 02_annotation_agreement.ipynb
+│   ├── 03_baselines.ipynb
+│   ├── 04_embedding_retrieval.ipynb
+│   ├── 05_finetuning_model_A.ipynb
+│   ├── 06_finetuning_model_B.ipynb
+│   └── 07_llm_generation_and_filtering.ipynb
 │
 ├── models/
-│ ├── bio/ # BioBERT checkpoints
-│ └── blue/ # BlueBERT checkpoints
-│ ├── gpt4_preds        # GPT-4.1 predictions via Azure OpenAI API (no local model)
+│   ├── baseline/
+│   ├── transformer_model_A/
+│   ├── transformer_model_B/
+│   └── llm_prompts/
 │
-└── README.md # Project documentation
+├── scripts/
+│   ├── preprocess.py
+│   ├── compute_kappa.py
+│   ├── generate_synthetic.py
+│   ├── embedding_retrieval.py
+│   ├── train_baselines.py
+│   └── evaluate.py
+│
+└── results/
+    ├── metrics/
+    ├── folds/
+    ├── plots/
+    └── error_analysis/
 ```
 ---
 
